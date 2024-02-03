@@ -1,13 +1,24 @@
 const { Router } = require('express')
 const router = Router()
 
-const {ObtenerJoyas, getJoyas, getJoyaById, createJoya, updateJoya, deleteJoya} = require('../controllers/controllers')
+// Importación de las funciones necesarias desde el archivo de controladores
+const {
+  getJoyas, 
+  getJoyaById, 
+  createJoya, 
+  updateJoya, 
+  deleteJoya
+} = require('../controllers/controllers');
 
-router.ObtenerJoyas('/joyas', ObtenerJoyas)
-router.get('/joyas', getJoyas)
-router.get('/joyas/:id', getJoyaById)
-router.post('/joyas', createJoya)
-router.put('/joyas/:id', updateJoya)
-router.delete('/joyas/:id', deleteJoya)
+// definicion de rutas para el endpoint
+router.route('/joyas')
+  .get(getJoyas) // GET 
+  .post(createJoya); // POST crea una nueva joya o elemento
+// define las rutas'/joyas/:id'
+router.route('/joyas/:id')
+  .get(getJoyaById) // GET solicitud para ver un elemento por ID
+  .put(updateJoya) // PUT ractualiza un elemento porID
+  .delete(deleteJoya); // DELETE elimina o borra un elemento por ID
 
-module.exports = router
+// exportación del modulo
+module.exports = router;
